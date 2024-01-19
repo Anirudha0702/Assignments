@@ -1,22 +1,16 @@
-package JAVA;
-
 import java.util.Scanner;
-
 class Timestamp {
     int hour, minute, second;
-
     Timestamp() {
         hour = 0;
         minute = 0;
         second = 0;
     }
-
     Timestamp(int hour, int minute, int second) {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
     }
-
     public Timestamp add(Timestamp t1, Timestamp t2) {
         int newHour = t1.hour + t2.hour;
         int newMinute = t1.minute + t2.minute;
@@ -31,16 +25,13 @@ class Timestamp {
         }
         return new Timestamp(newHour, newMinute, newSecond);
     }
-
     String print() {
         return hour + ":" + minute + ":" + second;
     }
-
     public static void main(String[] args) {
         Scanner get = new Scanner(System.in);
         System.out.println("Enter hour: ");
         int hour = get.nextInt();
-
         System.out.println("Enter minute: ");
         int minute = get.nextInt();
         System.out.println("Enter second: ");

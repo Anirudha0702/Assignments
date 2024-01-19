@@ -1,44 +1,50 @@
-package JAVA;
 
-class VehicleEngine implements Engine {
-    private int speed;
-    private int gear;
-    public VehicleEngine() {
-        speed = 0;
-        gear = 1;
+class BinaryTree {
+    TreeNode root;
+    public BinaryTree() {
+        root = null;
     }
-    @Override
-    public void speedUp(int value) {
-        if (value > 0) {
-            speed += value;
-            System.out.println("Speeding up. New speed: " + speed);
-        } else {
-            System.out.println("Invalid speed value. Speed must be greater than 0.");
+    public void inorderTraversal(TreeNode node) {
+        if (node != null) {
+            inorderTraversal(node.left);
+            System.out.print(node.data + " ");
+            inorderTraversal(node.right);
         }
     }
-    @Override
-    public void changeGear(int value) {
-        if (value >= 1 && value <= 6) {
-            gear = value;
-            System.out.println("Changing gear to: " + gear);
-        } else {
-            System.out.println("Invalid gear value. Gear must be between 1 and 6.");
+    public void preorderTraversal(TreeNode node) {
+        if (node != null) {
+            System.out.print(node.data + " ");
+            preorderTraversal(node.left);
+            preorderTraversal(node.right);
         }
     }
-    public void displayStatus() {
-        System.out.println("Current Speed: " + speed + ", Current Gear: " + gear);
+    public void postorderTraversal(TreeNode node) {
+        if (node != null) {
+            postorderTraversal(node.left);
+            postorderTraversal(node.right);
+            System.out.print(node.data + " ");
+        }
     }
     public static void main(String[] args) {
-        VehicleEngine carEngine = new VehicleEngine();
-
-        carEngine.speedUp(20);
-        carEngine.changeGear(2);
-        carEngine.speedUp(30);
-        carEngine.displayStatus();
+        BinaryTree tree = new BinaryTree();
+        tree.root = new TreeNode(1);
+        tree.root.left = new TreeNode(2);
+        tree.root.right = new TreeNode(3);
+        tree.root.left.left = new TreeNode(4);
+        tree.root.left.right = new TreeNode(5);
+        System.out.println("Inorder Traversal:");
+        tree.inorderTraversal(tree.root);
+        System.out.println("\nPreorder Traversal:");
+        tree.preorderTraversal(tree.root);
+        System.out.println("\nPostorder Traversal:");
+        tree.postorderTraversal(tree.root);
     }
 }
-
-interface Engine {
-    void speedUp(int value);
-    void changeGear(int value);
+class TreeNode {
+    int data;
+    TreeNode left, right;
+    public TreeNode(int item) {
+        data = item;
+        left = right = null;
+    }
 }

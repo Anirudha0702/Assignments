@@ -1,67 +1,71 @@
-package JAVA;
-class ComplexStack  {
-    private ComplexNumber[] stackArray;
-    private int top;
-    private int maxSize;
-    
-    public ComplexStack(int size) {
-        maxSize = size;
-        stackArray = new ComplexNumber[maxSize];
-        top = -1;
+import java.util.Scanner;
+class MatrixOperations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of rows for matrices A and B:");
+        int rowsA = scanner.nextInt();
+        System.out.print("Enter the number of columns for matrices A andB: ");
+        int colsA = scanner.nextInt();
+        int[][] matrixA = inputMatrix("A", rowsA, colsA, scanner);
+        int[][] matrixB = inputMatrix("B", rowsA, colsA, scanner);
+        int[][] sumMatrix = addMatrices(matrixA, matrixB);
+        int[][] productMatrix = multiplyMatrices(matrixA, matrixB);
+        System.out.println("Matrix A:");
+        printMatrix(matrixA);
+        System.out.println("Matrix B:");
+        printMatrix(matrixB);
+        System.out.println("Sum of Matrix A and B:");
+        printMatrix(sumMatrix);
+        System.out.println("Product of Matrix A and B:");
+        printMatrix(productMatrix);
+        scanner.close();
     }
-    public void push(ComplexNumber num) {
-        if (top < maxSize - 1) {
-            stackArray[++top] = num;
-            System.out.println("Pushed: " + num);
-        } else {
-            System.out.println("Stack overflow. Cannot push " + num);
+    public static int[][] inputMatrix(String matrixName, int rows, int cols, Scanner scanner) {
+        System.out.println("Enter elements for Matrix " + matrixName +":");
+        int[][] matrix = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print("Enter element at row " + (i + 1) + ",column " + (j + 1) + ": ");
+                matrix[i][j] = scanner.nextInt();
+            }
         }
+        return matrix;
     }
-
-    public ComplexNumber pop() {
-        if (top >= 0) {
-            ComplexNumber popped = stackArray[top--];
-            return popped;
-        } else {
-            System.out.println("Stack underflow. Cannot pop.");
-            return null;
+    public static int[][] addMatrices(int[][] matrixA, int[][] matrixB) {
+        int rows = matrixA.length;
+        int cols = matrixA[0].length;
+        int[][] result = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[i][j] = matrixA[i][j] + matrixB[i][j];
+            }
         }
+        return result;
     }
-    
-    public void display() {
-        if (top >= 0) {
-            System.out.print("Stack: ");
-            for (int i = 0; i <= top; i++) {
-                System.out.print(stackArray[i] + " ");
+    public static int[][] multiplyMatrices(int[][] matrixA, int[][] matrixB) {
+        int rowsA = matrixA.length;
+        int colsA = matrixA[0].length;
+        int colsB = matrixB[0].length;
+        int[][] result = new int[rowsA][colsB];
+        for (int i = 0; i < rowsA; i++) {
+            for (int j = 0; j < colsB; j++) {
+                int sum = 0;
+                for (int k = 0; k < colsA; k++) {
+                    sum += matrixA[i][k] * matrixB[k][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+        return result;
+    }
+    public static void printMatrix(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
-        } else {
-            System.out.println("Stack is empty.");
         }
-    }
-    public static void main(String[] args) {
-        ComplexStack stack = new ComplexStack(5);
-
-        stack.push(new ComplexNumber(2.5, 3.0));
-        stack.push(new ComplexNumber(1.0, -2.0));
-        stack.display();
-
-        System.out.println("Popped: " + stack.pop().toString());
-        stack.display();
     }
 }
-
-    class ComplexNumber {
-        double real;
-        double imaginary;
-    
-        public ComplexNumber(double real, double imaginary) {
-            this.real = real;
-            this.imaginary = imaginary;
-        }
-    
-        @Override
-        public String toString() {
-            return real + " + " + imaginary + "i";
-        }
-    }

@@ -1,56 +1,40 @@
-package JAVA;
-
-
-class BinaryTree {
-    TreeNode root;
-    public BinaryTree() {
-        root = null;
-    }
-    public void inorderTraversal(TreeNode node) {
-        if (node != null) {
-            inorderTraversal(node.left);
-            System.out.print(node.data + " ");
-            inorderTraversal(node.right);
-        }
-    }
-    public void preorderTraversal(TreeNode node) {
-        if (node != null) {
-            System.out.print(node.data + " ");
-            preorderTraversal(node.left);
-            preorderTraversal(node.right);
-        }
-    }
-    public void postorderTraversal(TreeNode node) {
-        if (node != null) {
-            postorderTraversal(node.left);
-            postorderTraversal(node.right);
-            System.out.print(node.data + " ");
-        }
-    }
-
+public class Asn_10 {
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
-        tree.root = new TreeNode(1);
-        tree.root.left = new TreeNode(2);
-        tree.root.right = new TreeNode(3);
-        tree.root.left.left = new TreeNode(4);
-        tree.root.left.right = new TreeNode(5);
-
-        System.out.println("Inorder Traversal:");
-        tree.inorderTraversal(tree.root);
-        System.out.println("\nPreorder Traversal:");
-        tree.preorderTraversal(tree.root);
-        System.out.println("\nPostorder Traversal:");
-        tree.postorderTraversal(tree.root);
+        int[] array = {12, 4, 5, 6, 7, 3, 1, 15};
+        System.out.println("Original array:");
+        printArray(array);
+        quickSort(array, 0, array.length - 1);
+        System.out.println("\nArray after Quick Sort:");
+        printArray(array);
     }
-}
-
-class TreeNode {
-    int data;
-    TreeNode left, right;
-
-    public TreeNode(int item) {
-        data = item;
-        left = right = null;
+    public static void quickSort(int[] array, int low, int high) {
+        if (low < high) {
+            int partitionIndex = partition(array, low, high);
+            quickSort(array, low, partitionIndex - 1);
+            quickSort(array, partitionIndex + 1, high);
+        }
+    }
+    public static int partition(int[] array, int low, int high) {
+        int pivot = array[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (array[j] < pivot) {
+                i++;
+                swap(array, i, j);
+            }
+        }
+        swap(array, i + 1, high);
+        return i + 1;
+    }
+    public static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    public static void printArray(int[] array) {
+        for (int value : array) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }
