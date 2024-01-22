@@ -27,6 +27,8 @@ def RGB_TO_BINARY(rgb_image):
         for j in range(rgb_image.shape[1]):
             gray_value = 0.3 * rgb_image[i, j, 0] + 0.59 * rgb_image[i, j, 1] + 0.11 * rgb_image[i, j, 2]
             binary_image[i,j]=255 if gray_value>=128 else 0
+    binary_image=cv.resize(binary_image,(256,256))
+    cv.imwrite("./Assets/leena.png",binary_image)
     return binary_image
 
 # RGB to HSV
