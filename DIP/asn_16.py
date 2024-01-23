@@ -12,5 +12,4 @@ for i in range(256):
         else:
             j[i,k]=peeper_img[i,k]
 cv.imshow("combined image",j)
-
 cv.waitKey(0)

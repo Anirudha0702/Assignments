@@ -17,12 +17,9 @@ def power_law_transformation(image,gamma):
     img_new=img_new.astype(np.uint8)
     return img_new
 def contrast_stretching(image, min_output=0, max_output=255):
-    # Calculate minimum and maximum pixel values in the input image
     min_input = np.min(image)
     max_input = np.max(image)
-    # Apply contrast stretching transformation
     stretched_image = (image - min_input) * ((max_output - min_output) / (max_input - min_input)) + min_output
-    # Clip values to ensure they are within the valid range [0, 255]
     stretched_image = np.clip(stretched_image, min_output, max_output)
     return stretched_image.astype(np.uint8)
 path = "./Assets/gray.jpg"

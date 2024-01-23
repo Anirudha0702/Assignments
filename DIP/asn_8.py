@@ -1,6 +1,5 @@
 import cv2 as cv
 import numpy as np
-
 def get_average(img1,img2):
     avg_image=np.zeros(img1.shape,np.uint32)
     for i in range(width):

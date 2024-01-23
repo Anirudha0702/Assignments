@@ -1,6 +1,5 @@
 import cv2 as cv
 import numpy as np
-
 def equilizeHist(image):
     pixel_frequency=np.zeros(256,np.uint32)
     equilized__image=np.zeros(image.shape,np.uint8)
@@ -23,7 +22,6 @@ def equilizeHist(image):
             equilized__image[i,j]=equilized_levels[image[i,j]]
     print(equilized_levels)
     return equilized__image
-
 path="./Assets/test_2.jpg"
 image=cv.imread(path,0)
 equilized__image=equilizeHist(image)

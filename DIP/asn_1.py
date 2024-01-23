@@ -1,7 +1,5 @@
 import cv2 as cv
 import numpy as np
-
-# RGB image to GRAYSCALE 
 def RGB_to_GRAY(rgb_image):
     gray_image = np.zeros((rgb_image.shape[0], rgb_image.shape[1]), dtype=np.uint8)
     for i in range(rgb_image.shape[0]):
@@ -9,18 +7,12 @@ def RGB_to_GRAY(rgb_image):
             gray_value = 0.3 * rgb_image[i, j, 0] + 0.59 * rgb_image[i, j, 1] + 0.11 * rgb_image[i, j, 2]
             gray_image[i, j] = int(gray_value)  
     return gray_image
-
-# GRAY SCALE to BINARY
-
 def GRAY_to_BINARY(gray_image):
     binary_image = np.zeros((gray_image.shape[0], gray_image.shape[1]), dtype=np.uint8)
     for i in range(gray_image.shape[0]):
         for j in range(gray_image.shape[1]):
             binary_image[i,j]=255 if gray_image[i,j]>=128 else 0
     return binary_image
-
-# RGB to BINARY
-
 def RGB_TO_BINARY(rgb_image):
     binary_image = np.zeros((rgb_image.shape[0],rgb_image.shape[1]), dtype=np.uint8)
     for i in range(rgb_image.shape[0]):
@@ -30,9 +22,6 @@ def RGB_TO_BINARY(rgb_image):
     binary_image=cv.resize(binary_image,(256,256))
     cv.imwrite("./Assets/leena.png",binary_image)
     return binary_image
-
-# RGB to HSV
-
 def RGB_to_HSV(rgb_image):
     hsv_image= np.zeros((rgb_image.shape[0],rgb_image.shape[1],3), dtype=np.uint8)
     for i in range(rgb_image.shape[0]):
@@ -55,9 +44,6 @@ def RGB_to_HSV(rgb_image):
             V = V
             hsv_image[i, j] = [H/2, S*255, V*255]
     return hsv_image
-
-# HSV to RGB
-
 def HSV_to_RGB(hsv_image):
     rgb_image=np.zeros((hsv_image.shape[0],hsv_image.shape[1],3),dtype=np.uint8)
     for i in range(hsv_image.shape[0]):
@@ -80,11 +66,8 @@ def HSV_to_RGB(hsv_image):
                 R,G,B=C,0,X
             rgb_image[i,j]=[(R+M)*255,(G+M)*255,(B+M)*255]
     return rgb_image
-
-# RGB to YCrCb
-
 def RGB_to_YCrCb(rgb_image):
-    delta=128 #for 8 bit image
+    delta=128
     YCrCb_image= np.zeros((rgb_image.shape[0],rgb_image.shape[1],3), dtype=np.uint8)
     for i in range(rgb_image.shape[0]):
         for j in range(rgb_image.shape[1]):
@@ -105,11 +88,8 @@ def YCrCb_to_RGB(YCrCb_image):
             b = y + 1.773 * (cb - delta)     
             rgb_image[i, j] = [r, g, b]
     return rgb_image
-
-
 path="./Assets/test_2.jpg"
 rgb_image=cv.imread(path)
-
 gray_image=RGB_to_GRAY(rgb_image)
 cv.imshow("GRAY IMAGE",gray_image)
 binary_image=GRAY_to_BINARY(gray_image)

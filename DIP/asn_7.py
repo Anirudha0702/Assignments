@@ -24,7 +24,6 @@ def manipulate_contrast_by_factor(img,factor):
     adjusted_image = np.clip(adjusted_image, 0, 255)
     adjusted_image = adjusted_image.astype(np.uint8)
     return adjusted_image
-
 path="./Assets/test_2.jpg"
 image=cv.imread(path,0)
 cv.imshow("original",image)
