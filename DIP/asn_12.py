@@ -4,11 +4,10 @@ def median_filter(img,x,y):
     array=np.sort(np.array([img[x-1,y-1],img[x-1,y],img[x-1,y+1],img[x,y-1],img[x,y],img[x,y+1],img[x+1,y-1],img[x+1,y],img[x+1,y+1]]),axis=None)
     return array[4]
 def weighted_avg_filter(img,x,y):
-    mask=np.array([[1,2,1],[2,4,2],[1,2,1]])
     weighted_pixel_value=(1*img[x-1,y-1]+2*img[x-1,y]+1*img[x-1,y+1]+2*img[x,y-1]+4*img[x,y]+2*img[x,y+1]+1*img[x+1,y-1]+2*img[x+1,y]+1*img[x+1,y+1])/16
     return round(weighted_pixel_value)
 def mean_filter(img,x,y):
-    return round((img[x-1,y-1]+img[x-1,y]+img[x-1,y+1]+img[x,y-1]+img[x,y]+img[x,y+1]+img[x+1,y-1]+img[x+1,y]+img[x+1,y+1])/9)
+    return np.mean(np.array([img[x-1,y-1],img[x-1,y],img[x-1,y+1],img[x,y-1],img[x,y],img[x,y+1],img[x+1,y-1],img[x+1,y],img[x+1,y+1]]))
 def max_filter(img,x,y):
     return np.amax(np.array([img[x-1,y-1],img[x-1,y],img[x-1,y+1],img[x,y-1],img[x,y],img[x,y+1],img[x+1,y-1],img[x+1,y],img[x+1,y+1]]))
 def min_filter(img,x,y):

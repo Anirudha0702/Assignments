@@ -16,6 +16,7 @@ def get_green_channel(rgb_image):
     return green_channel
 path="./Assets/test_2.jpg"
 rgb_image=cv.imread(path)
+cv.imshow("Original Image",rgb_image)
 cv.imshow("RED CHANNEL",get_red_channel(rgb_image))
 cv.imshow("GREEN CHANNEL",get_green_channel(rgb_image))
 cv.imshow("BLUE IMAGE",get_blue_channel(rgb_image))

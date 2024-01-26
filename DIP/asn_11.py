@@ -13,10 +13,10 @@ def add_salt_peeper_noise(image):
         _y=random.randint(0,image.shape[1]-1)
         image[x,y]=0
         image[_x,_y]=255
-    cv.imwrite("./Assets/salt_ppr.jpg",image)
     return image
 path="./Assets/test_2.jpg"
 image=cv.imread(path,0)
+cv.imshow("Original",image)
 cv.imshow("Gaussian Noise",add_gaussian_noise(image))
 cv.imshow("Salt Peper Noise",add_salt_peeper_noise(image))
 cv.waitKey(0)
